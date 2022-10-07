@@ -7,8 +7,8 @@ import './Form.scss';
 
 const Form: React.FC = () => {
     const [carNumber, setCarNumber] = useState<string>('');
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
+    const [startDate, setStartDate] = useState<string>('');
+    const [endDate, setEndDate] = useState<string>('');
 
     const result = useSelector((state: RootState) => {
         const { CarReducer } = state;
