@@ -17,8 +17,8 @@ const Form: React.FC = () => {
     })
 
     const CarNumberHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const car = result ? result.units.filter((unit: ICar) => {return e.target.value === unit.number}) : null;
-        setCarNumber(car.unit_id);
+        const car = result ? result.units.filter((unit: ICar) => {return e.target.value === unit.number}) : '';
+        setCarNumber(car?.unit_id);
     }
 
     const DateStartHandler = (e: React.ChangeEvent<HTMLDataElement>) => {
