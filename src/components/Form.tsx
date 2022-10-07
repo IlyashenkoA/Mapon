@@ -21,7 +21,7 @@ const Form: React.FC = () => {
         setCarNumber(car?.unit_id);
     }
 
-    const DateStartHandler = (e: React.ChangeEvent<HTMLDataElement>) => {
+    const DateStartHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setStartDate(e.target.value);
     }
 
