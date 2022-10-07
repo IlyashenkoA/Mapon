@@ -1,15 +1,16 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useTypedSelector } from "../hooks/useTypedSelector";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/reducers";
 import { ICar } from "../types/ICars";
 import './Form.scss';
 
 const Form: React.FC = () => {
-    const [carNumber, setCarNumber] = useState<number | string>();
+    const [carNumber, setCarNumber] = useState<number>(0);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
 
-    const result = useTypedSelector((state) => {
+    const result = useSelector((state: RootState) => {
         const { CarReducer } = state;
 
         return CarReducer.units[0];
@@ -24,7 +25,7 @@ const Form: React.FC = () => {
         setStartDate(e.target.value);
     }
 
-    const DateEndHandler = (e: React.ChangeEvent<HTMLDataElement>) => {
+    const DateEndHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEndDate(e.target.value);
     }
 
@@ -37,11 +38,7 @@ const Form: React.FC = () => {
     const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (carNumber === '') {
-            // Add some warning
-        } else {
-            fetchRoute();
-        }
+        fetchRoute();
     }
 
     return (
@@ -53,8 +50,8 @@ const Form: React.FC = () => {
                 <label className="label__text" htmlFor="vehicle">
                     Vehicle number<span className="required">*</span>
                 </label>
-                <select name='vehicle' id='vehicle' className="vehicle" onChange={CarNumberHandler} value={carNumber}>
-                    <option>Select vehicle</option>
+                <select name='vehicle' id='vehicle' className="vehicle" onChange={CarNumberHandler} value={carNumber} required>
+                    <option value=''>Select vehicle</option>
                     {result ? result.units.map((item: ICar) => {
                         return <option key={item.unit_id}>{item.number}</option>
                     }) : null}

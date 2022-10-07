@@ -1,1 +1,3 @@
-export const FETCH_CARS = "FETCH_CARS";
+export enum ACTIONS {
+    FETCH_CARS = 'FETCH_CARS'
+}

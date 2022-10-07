@@ -1,29 +1,19 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import './App.scss';
 import Form from './components/Form';
-import { fetchCars } from './store/action-creators/action-creators';
-import { ICars } from './types/ICars';
+import { actionCreators } from './store';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    fetchData();
-  }, [])
+  const { fetchCars } = bindActionCreators(actionCreators, dispatch);
 
-  async function fetchData() {
-    try {
-      setIsLoading(true);
-      const response = await axios.get<ICars[]>(`https://mapon.com/api/v1/unit/list.json?key=${process.env.REACT_APP_MAPON_API}`);
-      dispatch(fetchCars(response.data));
-      setIsLoading(false);
-    } catch (e) {
-      setIsLoading(false);
-    }
-  }
+  useEffect(() => {
+    fetchCars();
+  }, [])
 
   return (
     <div className='container'>
