@@ -6,7 +6,7 @@ import { ICar } from "../types/ICars";
 import './Form.scss';
 
 const Form: React.FC = () => {
-    const [carNumber, setCarNumber] = useState<number>(0);
+    const [carNumber, setCarNumber] = useState<string>('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
 
@@ -53,7 +53,7 @@ const Form: React.FC = () => {
                 <select name='vehicle' id='vehicle' className="vehicle" onChange={CarNumberHandler} value={carNumber} required>
                     <option value=''>Select vehicle</option>
                     {result ? result.units.map((item: ICar) => {
-                        return <option key={item.unit_id}>{item.number}</option>
+                        return <option key={item.unit_id} value={item.number}>{item.number}</option>
                     }) : null}
                 </select>
                 <label className="label__text">Period</label>
