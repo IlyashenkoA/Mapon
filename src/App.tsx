@@ -12,7 +12,7 @@ const App: React.FC = () => {
   const { fetchCars } = bindActionCreators(actionCreators, dispatch);
 
   useEffect(() => {
-    fetchCars();
+    fetchCars(setIsLoading);
   }, [])
 
   return (
