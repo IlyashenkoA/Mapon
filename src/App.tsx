@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import './App.scss';
-import Form from './components/Form';
+import Form from './components/Form/Form';
+import { Loader } from './components/Loader/Loader';
 import { actionCreators } from './store';
 
 const App: React.FC = () => {
@@ -17,10 +18,10 @@ const App: React.FC = () => {
 
   return (
     <div className='container'>
-      <div className='logo'>
+      <header className='header__logo'>
         <img src={require('./images/mapon-colour.png')} alt='Logo' />
-      </div>
-      {isLoading ? null : <Form />}
+      </header>
+      {isLoading ? <Loader /> : <Form />}
     </div>
   );
 }

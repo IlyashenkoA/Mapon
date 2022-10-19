@@ -2,8 +2,8 @@ export interface ICars {
     units: ICar[]
 }
 
-export type ICar = {
-    avg_fuel_consumption: AvgFuel
+export interface ICar {
+    avg_fuel_consumption: IAvgFuel
     box_id: number
     car_reg_certificate: string
     company_id: number
@@ -17,29 +17,29 @@ export type ICar = {
     last_updated: string
     lat: number
     lng: number
-    movement_state: MovementState
+    movement_state: IMovementState
     number: string
     shortcut: string
     speed: number
-    state: State
+    state: IState
     type: string
     unit_id: number
     vehicle_title: any
     vin: string
 }
 
-type AvgFuel = {
+interface IAvgFuel {
     measurement: string
     norm: number
 }
 
-type MovementState = {
+interface IMovementState {
     duration: number
     name: string
     start: string
 }
 
-type State = {
+interface IState {
     debug_info: object
     duration: number
     name: string

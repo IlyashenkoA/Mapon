@@ -15,7 +15,7 @@ export const CarReducer = (state = initialState, action: CarAction) => {
     case ACTIONS.FETCH_CARS:
       return {
         ...state,
-        units: [...state.units, action.payload?.data],
+        units: [...state.units, action.payload.data],
       };
     default:
       return state;

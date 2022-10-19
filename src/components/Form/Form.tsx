@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../store/reducers";
-import { ICar } from "../types/ICars";
+import { RootState } from "../../store/reducers";
+import { ICar } from "../../types/ICars";
 import './Form.scss';
 
 const Form: React.FC = () => {
@@ -17,8 +17,7 @@ const Form: React.FC = () => {
     })
 
     const CarNumberHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const car = result ? result.units.filter((unit: ICar) => {return e.target.value === unit.number}) : '';
-        setCarNumber(car?.unit_id);
+        setCarNumber(e.target.value);
     }
 
     const DateStartHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,9 +29,15 @@ const Form: React.FC = () => {
     }
 
     async function fetchRoute() {
-        const response = await axios.get(`https://mapon.com/api/v1/route/list.json?key=${process.env.REACT_APP_MAPON_API}?from=${startDate}?till${endDate}?unit_id=${carNumber}`);
-
-        console.log(response.data)
+        const response = await axios.get('https://mapon.com/api/v1/route/list.json', {
+            params: {
+                key: process.env.REACT_APP_MAPON_API,
+                from: new Date(startDate).toISOString().split('.')[0] + 'Z',
+                till: new Date(endDate).toISOString().split('.')[0] + 'Z',
+                unit_id: carNumber,
+                include: 'decoded_route'
+            }
+        });
     }
 
     const onSubmit = (e: React.FormEvent) => {
@@ -42,36 +47,36 @@ const Form: React.FC = () => {
     }
 
     return (
-        <div className="main">
-            <div className="header">
-                <p className="header__text">Route report</p>
-            </div>
-            <form className="form" id='form' onSubmit={onSubmit}>
-                <label className="label__text" htmlFor="vehicle">
+        <main className="main">
+            <header className="header">
+                <p className="header__title">Route report</p>
+            </header>
+            <form className="carForm" id='carForm' onSubmit={onSubmit}>
+                <label className="label__vehicle" htmlFor="vehicle">
                     Vehicle number<span className="required">*</span>
                 </label>
                 <select name='vehicle' id='vehicle' className="vehicle" onChange={CarNumberHandler} value={carNumber} required>
                     <option value=''>Select vehicle</option>
                     {result ? result.units.map((item: ICar) => {
-                        return <option key={item.unit_id} value={item.number}>{item.number}</option>
+                        return <option key={item.unit_id} value={item.unit_id}>{item.number}</option>
                     }) : null}
                 </select>
-                <label className="label__text">Period</label>
-                <div className="form__input--grouped">
-                    <div className="input__group">
-                        <label className="label__text" htmlFor="start-date">From</label>
+                <span className="label__period">Period</span>
+                <div className="input__period">
+                    <div className="input__fromPeriod">
+                        <label className="label__fromPeriod" htmlFor="start-date">From</label>
                         <input type='date' name='start-date' id="start-date" className="start-date" onChange={DateStartHandler} value={startDate} />
                     </div>
-                    <div className="input__group">
-                        <label className="label--text" htmlFor="end-date">To</label>
+                    <div className="input__toPeriod">
+                        <label className="label__toPeriod" htmlFor="end-date">To</label>
                         <input type='date' name='end-date' id='end-date' className="end-date" onChange={DateEndHandler} value={endDate} />
                     </div>
                 </div>
             </form>
-            <div className="footer">
-                <button type='submit' className="footer__button" form='form'>Generate</button>
-            </div>
-        </div>
+            <footer className="footer">
+                <button type='submit' className="footer__button" form='carForm'>Generate</button>
+            </footer>
+        </main>
     );
 }
 
