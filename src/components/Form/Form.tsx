@@ -1,49 +1,32 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useRef } from "react";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actionCreators } from "../../store";
 import { RootState } from "../../store/reducers";
-import { ICar } from "../../types/ICars";
-import './Form.scss';
+
+import Map from "../Map/Map";
+import Select from "../Select/Select";
 
 const Form: React.FC = () => {
-    const [carNumber, setCarNumber] = useState<string>('');
-    const [startDate, setStartDate] = useState<string>('');
-    const [endDate, setEndDate] = useState<string>('');
+    const carNumberRef = useRef<HTMLInputElement>(null);
+    const fromPeriodRef = useRef<HTMLInputElement>(null);
+    const toPeriodRef = useRef<HTMLInputElement>(null);
 
-    const result = useSelector((state: RootState) => {
-        const { CarReducer } = state;
+    const dispatch = useDispatch();
 
-        return CarReducer.units[0];
-    })
+    const { fetchRoutes } = bindActionCreators(actionCreators, dispatch);
 
-    const CarNumberHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setCarNumber(e.target.value);
-    }
-
-    const DateStartHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setStartDate(e.target.value);
-    }
-
-    const DateEndHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEndDate(e.target.value);
-    }
-
-    async function fetchRoute() {
-        const response = await axios.get('https://mapon.com/api/v1/route/list.json', {
-            params: {
-                key: process.env.REACT_APP_MAPON_API,
-                from: new Date(startDate).toISOString().split('.')[0] + 'Z',
-                till: new Date(endDate).toISOString().split('.')[0] + 'Z',
-                unit_id: carNumber,
-                include: 'decoded_route'
-            }
-        });
-    }
+    const [routes, cars] = useSelector((state: RootState) => [
+        state.RouteReducer.routeData[0],
+        state.CarReducer.carData[0]
+    ], shallowEqual)
 
     const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        fetchRoute();
+        if (fromPeriodRef.current && toPeriodRef.current && carNumberRef.current) {
+            fetchRoutes(fromPeriodRef.current.value, toPeriodRef.current.value, carNumberRef.current.value);
+        }
     }
 
     return (
@@ -51,32 +34,47 @@ const Form: React.FC = () => {
             <header className="header">
                 <p className="header__title">Route report</p>
             </header>
-            <form className="carForm" id='carForm' onSubmit={onSubmit}>
-                <label className="label__vehicle" htmlFor="vehicle">
-                    Vehicle number<span className="required">*</span>
-                </label>
-                <select name='vehicle' id='vehicle' className="vehicle" onChange={CarNumberHandler} value={carNumber} required>
-                    <option value=''>Select vehicle</option>
-                    {result ? result.units.map((item: ICar) => {
-                        return <option key={item.unit_id} value={item.unit_id}>{item.number}</option>
-                    }) : null}
-                </select>
-                <span className="label__period">Period</span>
-                <div className="input__period">
-                    <div className="input__fromPeriod">
-                        <label className="label__fromPeriod" htmlFor="start-date">From</label>
-                        <input type='date' name='start-date' id="start-date" className="start-date" onChange={DateStartHandler} value={startDate} />
+            <div className="container">
+                <form className="container__form" id='carForm' onSubmit={onSubmit}>
+                    <Select cars={cars} ref={carNumberRef} />
+                    <span className="label__period">Period</span>
+                    <div className="input__period">
+                        <div className="input__fromPeriod">
+                            <label className="label__fromPeriod" htmlFor="start-date">From</label>
+                            <input type='date' name='start-date' id="start-date" className="start-date" ref={fromPeriodRef} />
+                        </div>
+                        <div className="input__toPeriod">
+                            <label className="label__toPeriod" htmlFor="end-date">To</label>
+                            <input type='date' name='end-date' id='end-date' className="end-date" ref={toPeriodRef} />
+                        </div>
                     </div>
-                    <div className="input__toPeriod">
-                        <label className="label__toPeriod" htmlFor="end-date">To</label>
-                        <input type='date' name='end-date' id='end-date' className="end-date" onChange={DateEndHandler} value={endDate} />
+                </form>
+                {routes &&
+                    <div className="container__route">
+                        <div className="route__map">
+                            <Map routes={routes} />
+                        </div>
+                        <div className="route__results">
+                            <div className="results__distance">
+                                <span>128</span>
+                                <label>Km driven</label>
+                            </div>
+                            <div className="results__time">
+                                <span>3h 20m</span>
+                                <label>Driving time</label>
+                            </div>
+                            <div className="results__time">
+                                <span>1h 5m</span>
+                                <label>Driving time</label>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </form>
+                }
+            </div>
             <footer className="footer">
                 <button type='submit' className="footer__button" form='carForm'>Generate</button>
             </footer>
-        </main>
+        </main >
     );
 }
 

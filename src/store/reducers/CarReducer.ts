@@ -1,8 +1,8 @@
 import { ACTIONS } from "../types/actions";
-import { ICars } from "./../../types/ICars";
+import { ICars } from "../types/ICars";
 
 const initialState: ICars = {
-  units: [],
+  carData: [],
 };
 
 type CarAction = {
@@ -15,7 +15,7 @@ export const CarReducer = (state = initialState, action: CarAction) => {
     case ACTIONS.FETCH_CARS:
       return {
         ...state,
-        units: [...state.units, action.payload.data],
+        carData: [...state.carData, action.payload.data],
       };
     default:
       return state;

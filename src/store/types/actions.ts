@@ -1,3 +1,4 @@
 export enum ACTIONS {
-    FETCH_CARS = 'FETCH_CARS'
+    FETCH_CARS = 'FETCH_CARS',
+    FETCH_ROUTES = 'FETCH_ROUTES'
 }

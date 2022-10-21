@@ -1,0 +1,17 @@
+select {
+    background: #ffffff;
+    border: 1px solid #dcdee0;
+    border-radius: 3px;
+    height: 32px;
+}
+
+.label__vehicle {
+    font-family: "MuseoSans";
+    font-size: 14px;
+    line-height: 19px;
+    color: #384045;
+    
+    .required {
+        color: #ff4141;
+    }
+}

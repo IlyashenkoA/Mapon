@@ -1,0 +1,133 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+    width: 600px;
+    background: #ffffff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08), 0px 2px 14px rgba(0, 0, 0, 0.06);
+    border-radius: 3px;
+
+    .header {
+        height: 100px;
+
+        &__title {
+            position: relative;
+            top: 40px;
+            left: 26px;
+            height: max-content;
+            margin: 0;
+
+            font-family: "MuseoSans";
+            font-size: 24px;
+            line-height: 28px;
+            color: #384045;
+        }
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+
+        &__form {
+            display: grid;
+            grid-template-columns: 172px 380px;
+            grid-template-rows: repeat(2, 1fr);
+            align-items: baseline;
+            min-height: 100px;
+            margin-bottom: 40px;
+
+            .label__period,
+            .label__fromPeriod,
+            .label__toPeriod {
+                font-family: "MuseoSans";
+                font-size: 14px;
+                line-height: 19px;
+                color: #384045;
+            }
+        }
+    }
+
+    .route__results {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 45px;
+        margin: 25px 0;
+    }
+
+    .results__distance,
+    .results__time {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1px;
+
+        > span {
+            font-family: "MuseoSans";
+            font-size: 30px;
+            line-height: 35.16px;
+            color: #384045;
+        }
+
+        > label {
+            font-family: "MuseoSans";
+            font-size: 12px;
+            line-height: 16px;
+            color: #797f82;
+        }
+    }
+
+    .input__period {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        column-gap: 8px;
+    }
+
+    .input__fromPeriod,
+    .input__toPeriod {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        row-gap: 4px;
+    }
+
+    .footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        height: 64px;
+        padding-right: 24px;
+
+        background: #f4f4f4;
+        border-radius: 0px 0px 3px 3px;
+
+        &__button {
+            height: 32px;
+            width: 103px;
+            font-family: "MuseoSans";
+            font-size: 14px;
+            line-height: 16px;
+            text-align: center;
+            text-transform: uppercase;
+
+            color: #ffffff;
+            background: #98ca02;
+            border-radius: 3px;
+            border: none;
+        }
+
+        &__button:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.vertical__line {
+    position: absolute;
+    width: 1px;
+    height: 56px;
+    background: #dbdbdb;
+}
