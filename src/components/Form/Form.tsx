@@ -1,33 +1,50 @@
-import React, { useRef } from "react";
+import React from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { bindActionCreators } from "redux";
-import { actionCreators } from "../../store";
-import { RootState } from "../../store/reducers";
 
 import Map from "../Map/Map";
 import Select from "../Select/Select";
+import Input from "../Input/Input";
+import Info from "../Info/Info";
+
+import { actionCreators } from "../../store";
+import { RootState } from "../../store/reducers";
+
+export interface IFormValues {
+    vehicle: string,
+    fromPeriod: string,
+    toPeriod: string
+}
+
+const getDefaultPeriod = () => {
+    const date = new Date();
+
+    const fromPeriod = new Date(date.getFullYear(), date.getMonth(), 2).toISOString().slice(0, 10);
+    const toPeriod = new Date().toISOString().slice(0, 10);
+
+    return [fromPeriod, toPeriod];
+}
 
 const Form: React.FC = () => {
-    const carNumberRef = useRef<HTMLInputElement>(null);
-    const fromPeriodRef = useRef<HTMLInputElement>(null);
-    const toPeriodRef = useRef<HTMLInputElement>(null);
+    const { register, handleSubmit } = useForm<IFormValues>();
 
     const dispatch = useDispatch();
+    const [routeList, cars, routeDistance] = useSelector((state: RootState) => [
+        state.RouteReducer.routeData[0],
+        state.CarReducer.cars[0],
+        state.RouteDirectionReducer.routes
+    ], shallowEqual)
 
     const { fetchRoutes } = bindActionCreators(actionCreators, dispatch);
 
-    const [routes, cars] = useSelector((state: RootState) => [
-        state.RouteReducer.routeData[0],
-        state.CarReducer.carData[0]
-    ], shallowEqual)
+    const onSubmit: SubmitHandler<IFormValues> = (data) => {
+        const { fromPeriod, toPeriod, vehicle } = data;
 
-    const onSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-
-        if (fromPeriodRef.current && toPeriodRef.current && carNumberRef.current) {
-            fetchRoutes(fromPeriodRef.current.value, toPeriodRef.current.value, carNumberRef.current.value);
-        }
+        fetchRoutes(fromPeriod, toPeriod, vehicle);
     }
+
+    const [fromPeriod, toPeriod] = getDefaultPeriod();
 
     return (
         <main className="main">
@@ -35,44 +52,29 @@ const Form: React.FC = () => {
                 <p className="header__title">Route report</p>
             </header>
             <div className="container">
-                <form className="container__form" id='carForm' onSubmit={onSubmit}>
-                    <Select cars={cars} ref={carNumberRef} />
-                    <span className="label__period">Period</span>
-                    <div className="input__period">
-                        <div className="input__fromPeriod">
-                            <label className="label__fromPeriod" htmlFor="start-date">From</label>
-                            <input type='date' name='start-date' id="start-date" className="start-date" ref={fromPeriodRef} />
+                <form className="container__form" id='car-form' onSubmit={handleSubmit(onSubmit)}>
+                    <Select label='Vehicle number' defaultOption='Select vehicle' options={cars} {...register('vehicle')} required />
+                    <div className="period__text">Period</div>
+                    <div className="input-period">
+                        <div className="input-from-period">
+                            <Input type='date' label='From' defaultValue={fromPeriod} name="fromPeriod" register={register} required={false} />
                         </div>
-                        <div className="input__toPeriod">
-                            <label className="label__toPeriod" htmlFor="end-date">To</label>
-                            <input type='date' name='end-date' id='end-date' className="end-date" ref={toPeriodRef} />
+                        <div className="input-to-period">
+                            <Input type='date' label='To' defaultValue={toPeriod} name="toPeriod" register={register} required={false} />
                         </div>
                     </div>
                 </form>
-                {routes &&
+                {routeList &&
                     <div className="container__route">
                         <div className="route__map">
-                            <Map routes={routes} />
+                            <Map routes={routeList} dispatch={dispatch}/>
                         </div>
-                        <div className="route__results">
-                            <div className="results__distance">
-                                <span>128</span>
-                                <label>Km driven</label>
-                            </div>
-                            <div className="results__time">
-                                <span>3h 20m</span>
-                                <label>Driving time</label>
-                            </div>
-                            <div className="results__time">
-                                <span>1h 5m</span>
-                                <label>Driving time</label>
-                            </div>
-                        </div>
+                        {routeDistance && <Info routes={routeDistance} /> }
                     </div>
                 }
             </div>
             <footer className="footer">
-                <button type='submit' className="footer__button" form='carForm'>Generate</button>
+                <button type='submit' className="footer__button" form='car-form'>Generate</button>
             </footer>
         </main >
     );

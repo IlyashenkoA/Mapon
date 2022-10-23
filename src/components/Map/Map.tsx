@@ -5,23 +5,22 @@ import {
   Marker
 } from "@react-google-maps/api";
 import { useState } from "react";
+import { Dispatch } from "redux";
+
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-import { IRouteUnit } from "../../store/types/IRoutes";
+import { fetchRouteDirection } from "../../store/action-creators/action-creators";
+import { IRouteUnit, ILocation } from "../../store/types/IRoutes";
 
-interface ICoordinates {
+type ICoordinates = {
   origin: ILocation
   destination: ILocation
   setIsError: (value: boolean) => void
+  dispatch: Dispatch
 }
 
-interface ILocation {
-  lat: number,
-  lng: number
-}
-
-function getCoordinates({ origin, destination, setIsError }: ICoordinates) {
+const getDirection = ({ origin, destination, setIsError, dispatch }: ICoordinates) => {
   const directionsService = new google.maps.DirectionsService();
 
   directionsService.route(
@@ -32,12 +31,16 @@ function getCoordinates({ origin, destination, setIsError }: ICoordinates) {
     },
     (result, status) => {
       if (status === google.maps.DirectionsStatus.OK) {
+        if (result) {
+          dispatch(fetchRouteDirection(result));
+        }
         return result;
       } else {
         setIsError(true);
       }
     }
   );
+
   return undefined;
 }
 
@@ -50,7 +53,7 @@ const formatDirections = (routes: IRouteUnit) => {
   return [origin, destination]
 }
 
-const Map: React.FC<{ routes: IRouteUnit }> = ({ routes }) => {
+const Map: React.FC<{ routes: IRouteUnit, dispatch: Dispatch }> = ({ routes, dispatch }) => {
   const [isError, setIsError] = useState(false);
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API
@@ -68,13 +71,14 @@ const Map: React.FC<{ routes: IRouteUnit }> = ({ routes }) => {
         zoom={8}
         center={origin}
         mapContainerStyle={{ width: "600px", height: "200px" }}
-        options={{
-          zoomControl: false,
-          streetViewControl: false,
-          mapTypeControl: false,
-          fullscreenControl: false
+        options={
+          {
+            zoomControl: false,
+            streetViewControl: false,
+            mapTypeControl: false,
+            fullscreenControl: false
+          }
         }
-      }
       >
         <Marker position={origin} icon={{
           url: (require('../../images/marker.png'))
@@ -82,7 +86,7 @@ const Map: React.FC<{ routes: IRouteUnit }> = ({ routes }) => {
         <Marker position={destination} icon={{
           url: (require('../../images/marker.png'))
         }} />
-        {/* <DirectionsRenderer directions={getCoordinates({ origin, destination, setIsError })} /> */}
+        <DirectionsRenderer directions={getDirection({ origin, destination, setIsError, dispatch })} />
       </GoogleMap>
     );
   };

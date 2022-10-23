@@ -12,15 +12,11 @@ export interface IRoute {
 }
 
 interface IData {
-  route_id: number;
   end: ILocation;
   start: ILocation;
-  type: string;
 }
 
-interface ILocation {
-  address: string;
+export interface ILocation {
   lat: number;
   lng: number;
-  time: string;
 }

@@ -1,7 +1,14 @@
+@import './sass-utils/variables';
+
+@import './abstracts/mixins';
+
 @import './base/_reset';
+@import './base/root';
 @import './base/typography';
 
 @import './components/App';
 @import './components/Form';
 @import './components/Loader';
-@import './components/Select'
+@import './components/Select';
+@import './components/Info';
+@import './components/Input';

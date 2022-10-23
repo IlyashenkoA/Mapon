@@ -1,10 +1,13 @@
-import { RouteReducer } from './RouteReducer';
-import { combineReducers } from 'redux';
-import { CarReducer } from './CarReducer';
+import { combineReducers } from "redux";
+
+import { RouteReducer } from "./RouteReducer";
+import { CarReducer } from "./CarReducer";
+import { RouteDirectionReducer } from './RouteDirectionReducer';
 
 export const rootReducer = combineReducers({
-    CarReducer,
-    RouteReducer
+  CarReducer,
+  RouteReducer,
+  RouteDirectionReducer
 });
 
-export type RootState = ReturnType<typeof rootReducer>
+export type RootState = ReturnType<typeof rootReducer>;
