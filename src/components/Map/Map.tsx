@@ -32,6 +32,7 @@ const getDirection = ({ origin, destination, setIsError, dispatch }: ICoordinate
     (result, status) => {
       if (status === google.maps.DirectionsStatus.OK) {
         if (result) {
+          setIsError(false);
           dispatch(fetchRouteDirection(result));
         }
         return result;
@@ -54,7 +55,7 @@ const formatDirections = (routes: IRouteUnit) => {
 }
 
 const Map: React.FC<{ routes: IRouteUnit, dispatch: Dispatch }> = ({ routes, dispatch }) => {
-  const [isError, setIsError] = useState(false);
+  const [isError, setIsError] = useState(true);
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API
   })
