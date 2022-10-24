@@ -54,7 +54,7 @@
         border-radius: 0px 0px 3px 3px;
 
         &__button {
-            @include text-styles(14px, 1rem, bold, $white-color);
+            @include text-styles(14px, 16px, bold, $white-color);
 
             height: 32px;
             width: 103px;
