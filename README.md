@@ -23,5 +23,5 @@ displayed.
 ![image](https://user-images.githubusercontent.com/12977611/197500097-473c75b3-042e-4521-a7ab-e6f3bd738f6f.png)
 
 
-# Route is not visible, because Direction API was not enabled
+* Route is not visible, because Direction API was not enabled
 ![image](https://user-images.githubusercontent.com/12977611/197500369-7a92c66c-4de5-4b9b-ba62-1a53627bbea0.png)
