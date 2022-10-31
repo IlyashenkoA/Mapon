@@ -7,10 +7,10 @@
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08), 0px 2px 14px rgba(0, 0, 0, 0.06);
     border-radius: 3px;
 
-    .header {
+    .title {
         height: 100px;
 
-        &__title {
+        > p {
             position: relative;
             top: 40px;
             left: 26px;
@@ -21,28 +21,27 @@
         }
     }
 
-    .container {
+    .form {
         display: flex;
         flex-direction: column;
         gap: 0;
 
-        &__form {
+        &__route {
             display: grid;
             grid-template-columns: 172px 380px;
             grid-template-rows: repeat(2, 1fr);
+            justify-content: center;
             align-items: baseline;
             min-height: 100px;
             margin-bottom: 40px;
 
-            .period__text,
-            .from-period__label,
-            .from-period__label {
+            > p, div {
                 @include text-styles(14px, 19px, bold, $--primary-text-color);
             }
         }
     }
 
-    .footer {
+    .submit {
         display: flex;
         flex-direction: row;
         justify-content: flex-end;

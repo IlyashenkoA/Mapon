@@ -48,13 +48,13 @@ const Form: React.FC = () => {
 
     return (
         <main className="main">
-            <header className="header">
-                <p className="header__title">Route report</p>
-            </header>
-            <div className="container">
-                <form className="container__form" id='car-form' onSubmit={handleSubmit(onSubmit)}>
+            <div className="title">
+                <p>Route report</p>
+            </div>
+            <div className="form">
+                <form className="form__route" id='route-form' onSubmit={handleSubmit(onSubmit)}>
                     <Select label='Vehicle number' defaultOption='Select vehicle' options={cars} {...register('vehicle')} required />
-                    <div className="period__text">Period</div>
+                    <p>Period</p>
                     <div className="input-period">
                         <div className="input-from-period">
                             <Input type='date' label='From' defaultValue={fromPeriod} name="fromPeriod" register={register} required={false} />
@@ -65,7 +65,7 @@ const Form: React.FC = () => {
                     </div>
                 </form>
                 {routeList &&
-                    <div className="container__route">
+                    <div className="route">
                         <div className="route__map">
                             <Map routes={routeList} dispatch={dispatch} />
                         </div>
@@ -73,9 +73,9 @@ const Form: React.FC = () => {
                     </div>
                 }
             </div>
-            <footer className="footer">
-                <button type='submit' className="footer__button" form='car-form'>Generate</button>
-            </footer>
+            <div className="submit">
+                <button type='submit' className="submit__button" form='route-form'>Generate</button>
+            </div>
         </main>
     );
 }
