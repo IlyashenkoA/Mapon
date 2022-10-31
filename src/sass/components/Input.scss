@@ -5,6 +5,10 @@ input {
     height: 32px;
 
     @include text-styles(14px, 19px, bold, $--primary-text-color);
+
+    &:is(:focus, :hover) {
+        outline: none;
+    }
 }
 
 .input-period {

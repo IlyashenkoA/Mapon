@@ -49,7 +49,7 @@ const Form: React.FC = () => {
     return (
         <main className="main">
             <div className="title">
-                <p>Route report</p>
+                <h1>Route report</h1>
             </div>
             <div className="form">
                 <form className="form__route" id='route-form' onSubmit={handleSubmit(onSubmit)}>
