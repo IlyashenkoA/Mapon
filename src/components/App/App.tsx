@@ -16,7 +16,7 @@ const App: React.FC = () => {
   }, [])
 
   return (
-    <div className='container'>
+    <div className='wrapper'>
       <div className='logo'>
         <img src={require('../../images/logo.png')} alt='Logo' />
       </div>

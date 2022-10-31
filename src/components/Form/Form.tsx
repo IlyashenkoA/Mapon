@@ -67,16 +67,16 @@ const Form: React.FC = () => {
                 {routeList &&
                     <div className="container__route">
                         <div className="route__map">
-                            <Map routes={routeList} dispatch={dispatch}/>
+                            <Map routes={routeList} dispatch={dispatch} />
                         </div>
-                        {routeDistance && <Info routes={routeDistance} /> }
+                        {routeDistance && <Info routes={routeDistance} />}
                     </div>
                 }
             </div>
             <footer className="footer">
                 <button type='submit' className="footer__button" form='car-form'>Generate</button>
             </footer>
-        </main >
+        </main>
     );
 }
 
