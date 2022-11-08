@@ -64,6 +64,10 @@ const Map: React.FC<{ routes: IRouteUnit }> = ({ routes }) => {
 
   const [origin, destination] = formatDirections(routes);
 
+  if (isError) {
+    return <Skeleton width={600} height={200} />;
+  }
+
   if (isLoaded) {
     return (
       <GoogleMap
@@ -89,10 +93,6 @@ const Map: React.FC<{ routes: IRouteUnit }> = ({ routes }) => {
       </GoogleMap>
     );
   };
-
-  if (isError) {
-    return <Skeleton width={600} height={200} />;
-  }
 
   return <Skeleton width={600} height={200} />;
 };
