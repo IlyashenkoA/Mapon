@@ -7,7 +7,7 @@ import { actionCreators } from '../../store';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { fetchCars } = bindActionCreators(actionCreators, dispatch);
 
