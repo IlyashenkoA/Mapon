@@ -12,6 +12,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 import { fetchRouteDirection } from "../../store/action-creators/action-creators";
 import { IRouteUnit, ILocation } from "../../store/types/IRoutes";
+import { useDispatch } from "react-redux";
 
 type ICoordinates = {
   origin: ILocation
@@ -54,17 +55,14 @@ const formatDirections = (routes: IRouteUnit) => {
   return [origin, destination]
 }
 
-const Map: React.FC<{ routes: IRouteUnit, dispatch: Dispatch }> = ({ routes, dispatch }) => {
-  const [isError, setIsError] = useState(true);
+const Map: React.FC<{ routes: IRouteUnit }> = ({ routes }) => {
+  const dispatch = useDispatch();
+  const [isError, setIsError] = useState(false);
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API
-  })
+  });
 
   const [origin, destination] = formatDirections(routes);
-
-  if (isError) {
-    return <Skeleton width={600} height={200} />;
-  }
 
   if (isLoaded) {
     return (
@@ -91,6 +89,10 @@ const Map: React.FC<{ routes: IRouteUnit, dispatch: Dispatch }> = ({ routes, dis
       </GoogleMap>
     );
   };
+
+  if (isError) {
+    return <Skeleton width={600} height={200} />;
+  }
 
   return <Skeleton width={600} height={200} />;
 };

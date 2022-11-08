@@ -14,7 +14,7 @@ const Input: React.FC<InputProps> = ({ register, required, type, label, name, de
     return (
         <>
             <label className="from-period__label" htmlFor={name}>{label}</label>
-            <input type={type} {...register(name, {required})} value={defaultValue} />
+            <input type={type} {...register(name, {required})} defaultValue={defaultValue} />
         </>
     )
 }

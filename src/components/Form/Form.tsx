@@ -1,5 +1,5 @@
 import React from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { bindActionCreators } from "redux";
 
@@ -30,11 +30,18 @@ const Form: React.FC = () => {
     const { register, handleSubmit } = useForm<IFormValues>();
 
     const dispatch = useDispatch();
-    const [routeList, cars, routeDistance] = useSelector((state: RootState) => [
-        state.RouteReducer.routeData[0],
-        state.CarReducer.cars[0],
-        state.RouteDirectionReducer.routes
-    ], shallowEqual)
+
+    const routeList = useSelector((state: RootState) => {
+        return state.RouteReducer.routeData[0];
+    });
+
+    const cars = useSelector((state: RootState) => {
+        return state.CarReducer.cars[0];
+    });
+
+    const routeDistance = useSelector((state: RootState) => {
+        return state.RouteDirectionReducer.routes;
+    });
 
     const { fetchRoutes } = bindActionCreators(actionCreators, dispatch);
 
@@ -67,7 +74,7 @@ const Form: React.FC = () => {
                 {routeList &&
                     <div className="route">
                         <div className="route__map">
-                            <Map routes={routeList} dispatch={dispatch} />
+                            <Map routes={routeList} />
                         </div>
                         {routeDistance && <Info routes={routeDistance} />}
                     </div>
