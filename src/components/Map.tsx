@@ -84,10 +84,10 @@ const Map: React.FC<{ routes: IRouteUnit }> = ({ routes }) => {
         }
       >
         <Marker position={origin} icon={{
-          url: (require('../../images/marker.png'))
+          url: (require('../images/marker.png'))
         }} />
         <Marker position={destination} icon={{
-          url: (require('../../images/marker.png'))
+          url: (require('../images/marker.png'))
         }} />
         <DirectionsRenderer directions={getDirection({ origin, destination, setIsError, dispatch })} />
       </GoogleMap>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
 import Form from './Form';
 import { Loader } from './Loader';
 import { actionCreators } from '../store';
@@ -18,7 +19,7 @@ const App: React.FC = () => {
   return (
     <div className='wrapper'>
       <div className='logo'>
-        <img src={require('../../images/logo.png')} alt='Logo' />
+        <img src={require('../images/logo.png')} alt='Logo' />
       </div>
       {isLoading ? <Loader /> : <Form />}
     </div>
