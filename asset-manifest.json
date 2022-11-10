@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/Mapon/static/css/main.d6b1c427.css",
+    "main.css": "/Mapon/static/css/main.e56e130c.css",
     "main.js": "/Mapon/static/js/main.7ce97de0.js",
     "static/media/MuseoSans-100.woff2": "/Mapon/static/media/MuseoSans-100.8b774015c9e2fe7a28cf.woff2",
     "index.html": "/Mapon/index.html",
-    "main.d6b1c427.css.map": "/Mapon/static/css/main.d6b1c427.css.map",
+    "main.e56e130c.css.map": "/Mapon/static/css/main.e56e130c.css.map",
     "main.7ce97de0.js.map": "/Mapon/static/js/main.7ce97de0.js.map"
   },
   "entrypoints": [
-    "static/css/main.d6b1c427.css",
+    "static/css/main.e56e130c.css",
     "static/js/main.7ce97de0.js"
   ]
 }
