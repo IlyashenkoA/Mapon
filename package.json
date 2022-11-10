@@ -1,7 +1,7 @@
 {
   "name": "mapon",
   "version": "0.1.0",
-  "homepage": "https://ilyashenkoa.github.io/mapon",
+  "homepage": "https://ilyashenkoa.github.io/Mapon",
   "private": true,
   "dependencies": {
     "@react-google-maps/api": "^2.13.1",
