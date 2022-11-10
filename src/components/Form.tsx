@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { bindActionCreators } from "redux";
 
-import Map from "../Map/Map";
-import Select from "../Select/Select";
-import Input from "../Input/Input";
-import Info from "../Info/Info";
+import Map from "./Map";
+import Select from "./Select";
+import Input from "./Input";
+import Info from "./Info";
 
-import { actionCreators } from "../../store";
-import { RootState } from "../../store/reducers";
+import { actionCreators } from "../store";
+import { RootState } from "../store/reducers";
 
 export interface IFormValues {
     vehicle: string,

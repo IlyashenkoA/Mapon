@@ -10,8 +10,8 @@ import { Dispatch } from "redux";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-import { fetchRouteDirection } from "../../store/action-creators/action-creators";
-import { IRouteUnit, ILocation } from "../../store/types/IRoutes";
+import { fetchRouteDirection } from "../store/action-creators/action-creators";
+import { IRouteUnit, ILocation } from "../store/types/IRoutes";
 import { useDispatch } from "react-redux";
 
 type ICoordinates = {

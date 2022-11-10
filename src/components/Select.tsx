@@ -1,7 +1,7 @@
 import { forwardRef } from "react"
 import { UseFormRegister } from "react-hook-form";
-import { ICar, ICarUnit } from "../../store/types/ICars"
-import { IFormValues } from "../Form/Form";
+import { ICar, ICarUnit } from "../store/types/ICars"
+import { IFormValues } from "./Form";
 
 const Select = forwardRef<
     HTMLSelectElement,

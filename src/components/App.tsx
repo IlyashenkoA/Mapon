@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Form from '../Form/Form';
-import { Loader } from '../Loader/Loader';
-import { actionCreators } from '../../store';
+import Form from './Form';
+import { Loader } from './Loader';
+import { actionCreators } from '../store';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
