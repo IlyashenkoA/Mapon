@@ -3,8 +3,8 @@
     flex-direction: column;
     min-height: 300px;
     width: 600px;
-    background: $white-color;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08), 0px 2px 14px rgba(0, 0, 0, 0.06);
+    background: $--white-color;
+    box-shadow: 0px 2px 4px $--box-shadow-8, 0px 2px 14px $--box-shadow-6;
     border-radius: 3px;
 
     .title {
@@ -49,18 +49,18 @@
         height: 64px;
         padding-right: 24px;
 
-        background: #f4f4f4;
+        background: $--submit-background-color;
         border-radius: 0px 0px 3px 3px;
 
         &__button {
-            @include text-styles(14px, 16px, bold, $white-color);
+            @include text-styles(14px, 16px, bold, $--white-color);
 
             height: 32px;
             width: 103px;
             text-align: center;
             text-transform: uppercase;
 
-            background: $green-color;
+            background: $--green-color;
             border-radius: 3px;
             border: none;
         }
