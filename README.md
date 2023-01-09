@@ -15,11 +15,6 @@
 
 ### Route is not visible and data are not valid, because Direction API was not enabled due to "pay-as-you-go pricing model"
 <img src="https://user-images.githubusercontent.com/12977611/197500369-7a92c66c-4de5-4b9b-ba62-1a53627bbea0.png" alt="project-screenshot" width="700" />
- 
-  
-<h2>🧐 Features</h2>
-
-Here're some of the project's best features:
 
 <h2>🛠️ Installation Steps:</h2>
 
