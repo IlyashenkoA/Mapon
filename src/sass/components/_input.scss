@@ -1,0 +1,25 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+input {
+  background: var(--white-color);
+  border: 0.0625rem solid var(--bluish-gray-color);
+  border-radius: 0.1875rem;
+  padding: 0.325rem 0.25rem 0.325rem 0.65rem;
+
+  @include text-styles(
+    0.875rem,
+    1.1875rem,
+    bold,
+    var(--primary-text-color)
+  );
+
+  &:is(:focus, :hover) {
+    outline: none;
+    cursor: pointer;
+  }
+
+  &::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+  }
+}

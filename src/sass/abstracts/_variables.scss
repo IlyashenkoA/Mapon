@@ -1,13 +1,13 @@
-$--primary-text-color: #384045;
-$--secondary-text-color: #797f82;
+:root {
+  --primary-text-color: #384045;
+  --secondary-text-color: #797f82;
 
-$--green-color: #98ca02;
-$--white-color: #ffffff;
-$--red-color: #ff4141;
+  --green-color: #98ca02;
+  --white-color: #ffffff;
+  --red-color: #ff4141;
+  --bluish-gray-color: #dcdee0;
+  --light-gray-color: #f4f4f4;
 
-$--border-white-color: #dcdee0;
-
-$--box-shadow-8: rgba(0, 0, 0, 0.08);
-$--box-shadow-6: rgba(0, 0, 0, 0.06);
-
-$--submit-background-color: #f4f4f4;
+  --box-shadow-8: rgba(0, 0, 0, 0.08);
+  --box-shadow-6: rgba(0, 0, 0, 0.06);
+}

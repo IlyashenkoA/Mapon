@@ -1,0 +1,24 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.btn {
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
+  border-radius: 0.1875rem;
+  border: none;
+
+  @include text-styles(
+    0.875rem,
+    1rem,
+    bold,
+    var(--white-color)
+  );
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &-submit {
+    background-color: var(--green-color);
+  }
+}

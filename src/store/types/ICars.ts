@@ -1,5 +1,5 @@
 export interface ICars {
-  cars: ICarUnit[];
+  cars: ICar[];
 }
 
 export interface ICarUnit {

@@ -1,13 +1,4 @@
-@import './abstracts/mixins';
-@import './abstracts/variables';
-
-@import './base/_reset';
-@import './base/root';
-@import './base/typography';
-
-@import './components/App';
-@import './components/Form';
-@import './components/Loader';
-@import './components/Select';
-@import './components/Info';
-@import './components/Input';
+@use './abstracts';
+@use './base';
+@use './components';
+@use './layouts';

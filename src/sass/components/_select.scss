@@ -1,0 +1,15 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.select__group {
+  @include text-styles(
+    0.875rem,
+    1.1875rem,
+    bold,
+    var(--primary-text-color)
+  );
+
+  .required {
+    color: var(--red-color);
+  }
+}

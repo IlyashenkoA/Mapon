@@ -1,5 +1,5 @@
-import { ACTIONS } from "../types/actions";
-import { IRoutes } from "../types/IRoutes";
+import { ACTIONS } from '../types/actions';
+import { IRoutes } from '../types/IRoutes';
 
 const initialState: IRoutes = {
   routeData: [],
@@ -10,7 +10,10 @@ type RouteAction = {
   payload: any;
 };
 
-export const RouteReducer = (state = initialState, action: RouteAction) => {
+export const RouteReducer = (
+  state = initialState,
+  action: RouteAction
+) => {
   switch (action.type) {
     case ACTIONS.FETCH_ROUTES:
       return {

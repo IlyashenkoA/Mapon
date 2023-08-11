@@ -1,5 +1,15 @@
+import ReactDOM from 'react-dom';
+
 export const Loader = () => {
-    return (
-        <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
-    )
-}
+  const root = document.getElementById('root')!;
+
+  return ReactDOM.createPortal(
+    <div className='loader'>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>,
+    root
+  );
+};

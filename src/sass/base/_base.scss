@@ -1,0 +1,21 @@
+:root {
+  font-family: 'Museo sans';
+}
+
+html,
+body,
+#root {
+  min-height: 100vh;
+  min-width: 425px;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  .app__logo {
+    margin-top: 1.625rem;
+  }
+}

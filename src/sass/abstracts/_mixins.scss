@@ -1,6 +1,11 @@
-@mixin text-styles($font-size, $line-height, $font-weight, $color) {
-    font-size: $font-size;
-    line-height: $line-height;
-    font-weight: $font-weight;
-    color: $color;
+@mixin text-styles(
+  $font-size,
+  $line-height,
+  $font-weight,
+  $color
+) {
+  font-size: $font-size;
+  line-height: $line-height;
+  font-weight: $font-weight;
+  color: $color;
 }

@@ -10,20 +10,32 @@ const App: React.FC = () => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
 
-  const { fetchCars } = bindActionCreators(actionCreators, dispatch);
+  const { fetchCars } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
 
   useEffect(() => {
     fetchCars(setIsLoading);
-  }, [])
+  }, []);
 
   return (
-    <div className='wrapper'>
-      <div className='logo'>
-        <img src={require('../images/logo.png')} alt='Logo' />
-      </div>
-      {isLoading ? <Loader /> : <Form />}
-    </div>
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <div className='app__logo'>
+            <img
+              src={require('../assets/images/logo.png')}
+              alt='Mapon Logo'
+            />
+          </div>
+          <Form />
+        </>
+      )}
+    </>
   );
-}
+};
 
 export default App;

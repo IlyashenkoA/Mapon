@@ -1,4 +1,4 @@
-import { ACTIONS } from "./../types/actions";
+import { ACTIONS } from './../types/actions';
 
 const initialState: google.maps.DirectionsResult = {
   routes: [],
