@@ -11,7 +11,6 @@ import { Button } from './Button';
 import { actionCreators } from '../store';
 import { RootState } from '../store/reducers';
 import { ICar } from '../store/types/ICars';
-import { IRouteUnit } from '../store/types/IRoutes';
 
 export interface IFormValues {
   vehicle: string;
@@ -46,9 +45,8 @@ const Form: React.FC = () => {
   const dispatch = useDispatch();
 
   const routeList = useSelector((state: RootState) => {
-    if (state.RouteReducer.routeData)
-      return state.RouteReducer.routeData[0];
-  }) as IRouteUnit;
+    return state.RouteReducer.routes;
+  });
 
   const cars = useSelector((state: RootState) => {
     return state.CarReducer.cars;
@@ -222,7 +220,7 @@ const Form: React.FC = () => {
             />
           </div>
         </form>
-        {routeList ? (
+        {routeList.length > 0 ? (
           <div className='main__route'>
             <div className='route__map'>
               <Map routes={routeList} />

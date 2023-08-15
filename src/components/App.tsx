@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 
 import Form from './Form';
 import { Loader } from './Loader';
+
 import { actionCreators } from '../store';
 
 const App: React.FC = () => {

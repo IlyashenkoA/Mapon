@@ -2,15 +2,13 @@ import axios from 'axios';
 import { Dispatch } from 'redux';
 
 import { ACTIONS } from '../types/actions';
-import { ICarUnit } from '../types/ICars';
-import { IRouteUnit } from '../types/IRoutes';
 
 export const fetchCars =
   (setIsLoading: (value: boolean) => void) =>
   async (dispatch: Dispatch) => {
     setIsLoading(true);
     try {
-      const response = await axios.get<ICarUnit>(
+      const response = await axios.get(
         `https://mapon.com/api/v1/unit/list.json?key=${process.env.REACT_APP_MAPON_API}`
       );
 
@@ -31,7 +29,7 @@ export const fetchRoutes =
     carNumber: string
   ) =>
   async (dispatch: Dispatch) => {
-    const response = await axios.get<IRouteUnit>(
+    const response = await axios.get(
       'https://mapon.com/api/v1/route/list.json',
       {
         params: {

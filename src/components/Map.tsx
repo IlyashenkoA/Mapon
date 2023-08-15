@@ -5,16 +5,16 @@ import {
   Marker,
 } from '@react-google-maps/api';
 import { useEffect, useState } from 'react';
-
 import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
-
-import { fetchRouteDirection } from '../store/action-creators/action-creators';
-import { IRouteUnit } from '../store/types/IRoutes';
 import { useDispatch } from 'react-redux';
 
-const formatDirections = (routes: IRouteUnit) => {
-  const route = routes.units![0].routes;
+import { fetchRouteDirection } from '../store/action-creators/action-creators';
+import { IRoute } from '../store/types/IRoutes';
+
+import 'react-loading-skeleton/dist/skeleton.css';
+
+const formatDirections = (routes: IRoute[]) => {
+  const route = routes[0].routes;
 
   const origin = {
     lat: route[0].start
@@ -36,7 +36,7 @@ const formatDirections = (routes: IRouteUnit) => {
   return [origin, destination];
 };
 
-const Map: React.FC<{ routes: IRouteUnit }> = ({
+const Map: React.FC<{ routes: IRoute[] }> = ({
   routes,
 }) => {
   const dispatch = useDispatch();

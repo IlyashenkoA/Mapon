@@ -2,7 +2,7 @@ import { ACTIONS } from '../types/actions';
 import { IRoutes } from '../types/IRoutes';
 
 const initialState: IRoutes = {
-  routeData: [],
+  routes: [],
 };
 
 type RouteAction = {
@@ -18,7 +18,7 @@ export const RouteReducer = (
     case ACTIONS.FETCH_ROUTES:
       return {
         ...state,
-        routeData: [action.payload.data],
+        routes: [...action.payload.data.units],
       };
     default:
       return state;

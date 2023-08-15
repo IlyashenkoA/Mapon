@@ -1,9 +1,5 @@
 export interface IRoutes {
-  routeData?: IRoute[];
-}
-
-export interface IRouteUnit {
-  units: IRoute[];
+  routes: IRoute[];
 }
 
 export interface IRouteError {
