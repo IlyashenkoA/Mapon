@@ -23,3 +23,15 @@ input {
     cursor: pointer;
   }
 }
+
+.error {
+  padding-top: 0.5rem;
+  grid-column: 2;
+
+  @include text-styles(
+    0.8rem,
+    1rem,
+    bold,
+    var(--red-color)
+  );
+}

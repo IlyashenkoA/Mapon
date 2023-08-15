@@ -1,24 +1,40 @@
 import {
   Control,
   Controller,
+  FieldErrors,
   FieldName,
+  RegisterOptions,
 } from 'react-hook-form';
 import Select from 'react-select';
 
 import { IFormValues } from '../Form';
 
-interface SelectComponentProps {
+type SelectComponentProps<T extends keyof IFormValues> = {
   label: string;
   defaultOption: string;
   options: { label: string; value: string }[];
   control: Control<IFormValues>;
   required?: boolean;
   name: FieldName<IFormValues>;
-}
+  errors?: FieldErrors<IFormValues>;
+  render?: (
+    errors: FieldErrors<IFormValues>
+  ) => JSX.Element | null;
+  registerOptions?: RegisterOptions<IFormValues, T>;
+};
 
-export const SelectComponent: React.FC<
-  SelectComponentProps
-> = ({ name, label, options, required, control }) => {
+export const SelectComponent = <
+  T extends keyof IFormValues,
+>({
+  name,
+  label,
+  options,
+  required,
+  control,
+  errors,
+  render,
+  registerOptions,
+}: SelectComponentProps<T>) => {
   return (
     <div className='select__group'>
       <label className={`label__${name}`} htmlFor={name}>
@@ -32,11 +48,11 @@ export const SelectComponent: React.FC<
           <Select
             options={options}
             onChange={val => onChange(val!.value)}
-            required={required}
           />
         )}
-        rules={{ required: required }}
+        rules={{ required: registerOptions?.required }}
       />
+      {errors && render ? render(errors) : null}
     </div>
   );
 };

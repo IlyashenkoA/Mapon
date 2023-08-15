@@ -1,23 +1,33 @@
-import { Path, UseFormRegister } from 'react-hook-form';
+import {
+  FieldErrors,
+  RegisterOptions,
+  UseFormRegister,
+} from 'react-hook-form';
 import { IFormValues } from '../Form';
 
-type InputProps = {
+type InputProps<T extends keyof IFormValues> = {
   register: UseFormRegister<IFormValues>;
-  required: boolean;
   type: string;
   label: string;
-  name: Path<IFormValues>;
+  name: T;
   defaultValue?: string;
+  errors?: FieldErrors<IFormValues>;
+  render?: (
+    errors: FieldErrors<IFormValues>
+  ) => JSX.Element | null;
+  registerOptions?: RegisterOptions<IFormValues, T>;
 };
 
-const Input: React.FC<InputProps> = ({
+const Input = <T extends keyof IFormValues>({
   register,
-  required,
   type,
   label,
   name,
   defaultValue,
-}) => {
+  errors,
+  render,
+  registerOptions,
+}: InputProps<T>) => {
   return (
     <div className='input__group'>
       <label className='from-period__label' htmlFor={name}>
@@ -25,9 +35,10 @@ const Input: React.FC<InputProps> = ({
       </label>
       <input
         type={type}
-        {...register(name, { required })}
+        {...register(name, registerOptions)}
         defaultValue={defaultValue}
       />
+      {errors && render ? render(errors) : null}
     </div>
   );
 };

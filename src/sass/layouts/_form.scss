@@ -57,9 +57,13 @@
     }
 
     .input__period {
-      display: flex;
-      flex-flow: row wrap;
+      display: grid;
+      grid-template-columns: 1fr;
       gap: 0.5rem;
+
+      @include tablet {
+        grid-template-columns: 1fr 1fr;
+      }
 
       .input__group {
         display: flex;
@@ -72,9 +76,9 @@
 
   &__submit {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     padding: 1rem 1.5rem;
-    background-color: var(--lightgray--color);
+    background-color: var(--light-gray-color);
 
     & > button {
       margin-left: auto;

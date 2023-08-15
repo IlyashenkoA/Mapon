@@ -4,60 +4,17 @@ import {
   useJsApiLoader,
   Marker,
 } from '@react-google-maps/api';
-import { useState } from 'react';
-import { Dispatch } from 'redux';
+import { useEffect, useState } from 'react';
 
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 import { fetchRouteDirection } from '../store/action-creators/action-creators';
-import {
-  IRouteUnit,
-  ILocation,
-} from '../store/types/IRoutes';
+import { IRouteUnit } from '../store/types/IRoutes';
 import { useDispatch } from 'react-redux';
 
-type ICoordinates = {
-  origin: ILocation;
-  destination: ILocation;
-  setIsError: (value: boolean) => void;
-  dispatch: Dispatch;
-};
-
-const getDirection = ({
-  origin,
-  destination,
-  setIsError,
-  dispatch,
-}: ICoordinates) => {
-  const directionsService =
-    new google.maps.DirectionsService();
-
-  directionsService.route(
-    {
-      origin: origin,
-      destination: destination,
-      travelMode: google.maps.TravelMode.DRIVING,
-    },
-    (result, status) => {
-      if (status === google.maps.DirectionsStatus.OK) {
-        if (result) {
-          setIsError(false);
-          dispatch(fetchRouteDirection(result));
-        }
-
-        return result;
-      } else {
-        setIsError(true);
-      }
-    }
-  );
-
-  return undefined;
-};
-
 const formatDirections = (routes: IRouteUnit) => {
-  const route = routes.units[0].routes;
+  const route = routes.units![0].routes;
 
   const origin = {
     lat: route[0].start
@@ -86,9 +43,40 @@ const Map: React.FC<{ routes: IRouteUnit }> = ({
   const [isError, setIsError] = useState(false);
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API,
+    language: 'en',
   });
 
   const [origin, destination] = formatDirections(routes);
+  const [directions, setDirections] =
+    useState<google.maps.DirectionsResult | null>(null);
+
+  useEffect(() => {
+    if (isLoaded) {
+      const directionsService =
+        new google.maps.DirectionsService();
+
+      directionsService.route(
+        {
+          origin: origin,
+          destination: destination,
+          travelMode: google.maps.TravelMode.DRIVING,
+        },
+        (result, status) => {
+          if (status === google.maps.DirectionsStatus.OK) {
+            if (result) {
+              setIsError(false);
+              dispatch(fetchRouteDirection(result));
+              setDirections(result);
+            }
+
+            return result;
+          } else {
+            setIsError(true);
+          }
+        }
+      );
+    }
+  }, [isLoaded, routes]);
 
   if (isError) {
     return <Skeleton />;
@@ -118,14 +106,14 @@ const Map: React.FC<{ routes: IRouteUnit }> = ({
             url: require('../assets/images/marker.png'),
           }}
         />
-        <DirectionsRenderer
-          directions={getDirection({
-            origin,
-            destination,
-            setIsError,
-            dispatch,
-          })}
-        />
+        {directions && (
+          <DirectionsRenderer
+            directions={directions}
+            options={{
+              suppressMarkers: true,
+            }}
+          />
+        )}
       </GoogleMap>
     );
   }
