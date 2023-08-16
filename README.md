@@ -9,11 +9,14 @@
   </p>
 </p>
 
-
-
 ## About The Project
 
 Introducing an application harnessing the power of the Mapon API in conjunction with the Google Maps API to provide an intuitive and informative experience. This app is designed to visually display the trajectory traversed by a car.
+
+### Key features:
+* Using the Mapon API and the Google Maps API, the map must show the route taken by the car.
+* The user must be able to select a car from the list of available cars and the time period (days).
+* After confirming the selected car and period, a map with the route must be displayed.
 
 <img src="https://github.com/IlyashenkoA/Mapon/assets/12977611/0489e052-36f3-4103-94b8-e0b92470a2e7" width="700" />
 <img src="https://github.com/IlyashenkoA/Mapon/assets/12977611/c6ac0fec-9074-4f20-aca3-dc6acb7b3dfc" width="700" />
