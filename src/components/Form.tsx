@@ -154,21 +154,18 @@ const Form: React.FC = () => {
               }}
               errors={errors}
               render={errors => {
-                const validationMessage = errors.fromPeriod
-                  ? errors.fromPeriod.message
-                  : '';
-
                 return (
                   <>
-                    {validationMessage && (
-                      <p className='error error-required'>
-                        {validationMessage}
-                      </p>
-                    )}
                     {errors.fromPeriod ? (
                       <>
                         {errors.fromPeriod.type ===
                           'required' && (
+                          <p className='error error-required'>
+                            {errors.fromPeriod.message}
+                          </p>
+                        )}
+                        {errors.fromPeriod.type ===
+                          'validate' && (
                           <p className='error error-required'>
                             {errors.fromPeriod.message}
                           </p>
@@ -194,20 +191,18 @@ const Form: React.FC = () => {
               }}
               errors={errors}
               render={errors => {
-                const validationMessage = errors.toPeriod
-                  ? errors.toPeriod.message
-                  : '';
                 return (
                   <>
-                    {validationMessage && (
-                      <p className='error error-required'>
-                        {validationMessage}
-                      </p>
-                    )}
                     {errors.toPeriod ? (
                       <>
                         {errors.toPeriod.type ===
                           'required' && (
+                          <p className='error error-required'>
+                            {errors.toPeriod.message}
+                          </p>
+                        )}
+                        {errors.toPeriod.type ===
+                          'validate' && (
                           <p className='error error-required'>
                             {errors.toPeriod.message}
                           </p>
